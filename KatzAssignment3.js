@@ -16,7 +16,7 @@ var thetaLoc;
 var direction = true;
 var speed = 0;
 var vertices;
-var verticies1;
+var vertices1;
 var program;
 var program1;
 var colors;
@@ -43,7 +43,7 @@ window.onload = function init()
     program = initShaders(gl, "vertex-shader", "fragment-shader");
     thetaLoc = gl.getUniformLocation(program, "utheta");
     //This is the second program that did not work: 
-    //program1 = initShaders(gl, "vertex-shader-still", "fragment-shader");
+    program1 = initShaders(gl, "vertex-shader-still", "fragment-shader");
      vertices = [
 
         vec2(0, .5),
@@ -84,11 +84,11 @@ window.onload = function init()
         vec3(.5,0,.5),
         vec3(.5,0,.5)
     ];
-    //verticies1 = [
-      //  vec2(-1, 1),
-        //vec2(-.90, 1),
-        //vec2(-1, .90)
-    //];
+    vertices1 = [
+       vec2(-1, 1),
+        vec2(-.90, 1),
+        vec2(-1, .90)
+    ];
 
     //The botton to stop and start rotation
     document.getElementById("Direction").onclick = function()
@@ -188,17 +188,17 @@ function render() {
 
     //The not working code: 
 
-    //gl.useProgram(program1);
+    gl.useProgram(program1);
 
-    //var bufferId2 = gl.createBuffer();
-    //gl.bindBuffer(gl.ARRAY_BUFFER, bufferId2);
-    //gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices1), gl.STATIC_DRAW);
+    var bufferId2 = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufferId2);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices1), gl.STATIC_DRAW);
 
-    //var positionLoc2 = gl.getAttribLocation(program_1, "aPosition");
-    //gl.vertexAttribPointer(positionLoc2, 2, gl.FLOAT, false, 0,0);
-    //gl.enableVertexAttribArray(positionLoc2);
+    var positionLoc2 = gl.getAttribLocation(program1, "aPosition");
+    gl.vertexAttribPointer(positionLoc2, 2, gl.FLOAT, false, 0,0);
+    gl.enableVertexAttribArray(positionLoc2);
 
-    //gl.drawArrays(gl.TRIANGLES, 0, vertices1.length);
+    gl.drawArrays(gl.TRIANGLES, 0, vertices1.length);
     requestAnimationFrame(render);
 }
 

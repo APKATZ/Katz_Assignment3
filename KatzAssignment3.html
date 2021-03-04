@@ -25,10 +25,12 @@ main()
     vColor = vec4(aColor, 1.0);
 }
 </script>
+
 <script id="vertex-shader-still" type="x-shader/x-vertex">
     #version 300 es 
-
     in vec4 aPosition;
+    in vec3 aColor;
+    out vec4 vColor;
 
     void
     main()
@@ -37,6 +39,7 @@ main()
         gl_Position.y = aPosition.y;
         gl_Position.z = 0.0;
         gl_Position.w = 1.0;
+        vColor = vec4(aColor, 1.0);
     }
 </script>
 
